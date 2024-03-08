@@ -1,6 +1,7 @@
 import { expect, test } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import Page,{kakezan} from './index'
+import React from 'react'; // Add import statement for React
+import Page,{kakezan} from '../pages/demo/index'
 
 test('kakezanのテスト', () => {
   expect(kakezan(1, 2)).toBe(2)
