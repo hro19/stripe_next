@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 
 import Search from '../pages/demo/search';
 
-describe('App', () => {
+describe('serchテスト', () => {
   test('テキストがあるかの確認', () => {
     render(<Search />);
 
@@ -15,5 +15,18 @@ describe('App', () => {
 
     // テキストが複数の要素に分割されている場合、getByTextを使用してテキストを検索します。
     screen.getByText(/Searches for/i);
+  });
+
+  test('SearchテキストがあるのかtoBeInTheDocumentによる確認', () => {
+    render(<Search />);
+
+    // fails
+    expect(screen.queryByText('Searchテキスト')).not.toBeInTheDocument();
+
+    // succeeds
+    expect(screen.getByText('Searchテキスト:')).toBeInTheDocument();
+
+    // succeeds
+    expect(screen.getByText(/Searches for/i)).toBeInTheDocument();
   });
 });
