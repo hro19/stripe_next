@@ -30,3 +30,15 @@ describe('serchテスト', () => {
     expect(screen.getByText(/Searches for/i)).toBeInTheDocument();
   });
 });
+
+test('SearchテキストがあるのかgetByRoleによる確認', () => {
+  render(<Search />);
+
+  expect(screen.getByRole('textbox')).toBeInTheDocument();
+  expect(screen.getByLabelText(/Searchテキスト:/i)).toBeInTheDocument();
+  //他の例
+  // LabelText: getByLabelText: <label for="search" />
+  // PlaceholderText: getByPlaceholderText: <input placeholder="Search" />
+  // AltText: getByAltText: <img alt="profile" />
+  // DisplayValue: getByDisplayValue: <input value="JavaScript" />
+});
