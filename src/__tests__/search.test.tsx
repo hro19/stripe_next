@@ -48,7 +48,7 @@ test('文字入力のテスト', async () => {
   render(<Search />);
  
   // 未入力
-  expect(await screen.getByText('Searchテキスト:')).toBeInTheDocument();
+  expect(await screen.getByText('Searches for ...')).toBeInTheDocument();
 
   // inputフィールドに文字を入力
   const input = screen.getByRole('textbox');
