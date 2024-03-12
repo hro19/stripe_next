@@ -1,7 +1,21 @@
 import React from 'react';
 
+function getUser() {
+  return Promise.resolve({ id: '1', name: 'Robin' });
+}
+
 function SearchPage() {
-  const [search, setSearch] = React.useState('');
+  const [search, setSearch] = React.useState<string>('');
+  const [user, setUser] = React.useState<any>(null);
+
+  React.useEffect(() => {
+    const loadUser = async () => {
+      const user = await getUser();
+      setUser(user);
+    };
+
+    loadUser();
+  }, []);
 
   function handleChange(event:any) {
     setSearch(event.target.value);
@@ -9,6 +23,7 @@ function SearchPage() {
 
   return (
     <div className="m-3">
+      <h2>{user ? <p>Signed in as {user.name}</p> : null}</h2>
       <Search value={search} onChange={handleChange}>
         Searchテキスト:
       </Search>

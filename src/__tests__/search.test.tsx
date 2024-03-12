@@ -57,3 +57,12 @@ test('文字入力のテスト', async () => {
   // 入力されたテキストが表示されていることを確認
   expect(await screen.findByText('Searches for 文字文字')).toBeInTheDocument();
  });
+
+  test('ユーザー名を非同期（useEffect）で取得して表示', async () => {
+    render(<Search />);
+
+    expect(screen.queryByText(/Signed in as/)).toBeNull();
+
+    expect(await screen.findByText(/Signed in as/)).toBeInTheDocument();
+    expect(await screen.findByText("Signed in as Robin")).toBeInTheDocument();
+  });
