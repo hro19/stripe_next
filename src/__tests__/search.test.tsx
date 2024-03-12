@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import Search from '../pages/demo/search';
 
@@ -42,3 +43,17 @@ test('SearchテキストがあるのかgetByRoleによる確認', () => {
   // AltText: getByAltText: <img alt="profile" />
   // DisplayValue: getByDisplayValue: <input value="JavaScript" />
 });
+
+test('文字入力のテスト', async () => {
+  render(<Search />);
+ 
+  // 未入力
+  expect(await screen.getByText('Searchテキスト:')).toBeInTheDocument();
+
+  // inputフィールドに文字を入力
+  const input = screen.getByRole('textbox');
+  userEvent.type(input, '文字文字');
+ 
+  // 入力されたテキストが表示されていることを確認
+  expect(await screen.findByText('Searches for 文字文字')).toBeInTheDocument();
+ });
